@@ -22,6 +22,10 @@ else
     disp('invalid input')
 end
 
+python2path = input(['Please type your python2 path in your pc \n ' ...
+    '(For example: /Users/junningdeng/anaconda/bin)   '],'s');
+
+
 
 % -------------------------------------------------------------------------
 % Compute initial background distribution
@@ -86,7 +90,7 @@ c = init_c;
 while ~isempty(candi_sid_up)
 
     % Searching an inital set of instances for a template
-    init_inss = instances_for_initial_template(up_W_,init_c,l,'y',reduced_size);
+    init_inss = instances_for_initial_template(up_W_,init_c,l,'y',reduced_size,python2path);
     
     init_inss = candi_sid_up(init_inss)';
     

@@ -1,8 +1,9 @@
-function inss = instances_for_initial_template(M,candi_count,wind_size,fix_ins,reduce_size)
+function inss = instances_for_initial_template(M,candi_count,wind_size,fix_ins,reduce_size,python2path)
 
 % setenv('PATH', ['/usr/bin', pathsep, getenv('PATH')])
-setenv('PATH', ['home/judng/miniconda3/bin', pathsep, getenv('PATH')]) % please adapt it to your own python address
+% setenv('PATH', ['home/judng/miniconda3/bin', pathsep, getenv('PATH')]) % please adapt it to your own python address
 % setenv('PATH', ['/Users/junningdeng/anaconda/bin', pathsep, getenv('PATH')])
+setenv('PATH', [python2path, pathsep, getenv('PATH')])
 csvwrite('M.csv',M);
 
 pwd
