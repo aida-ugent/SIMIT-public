@@ -1,71 +1,115 @@
+MATLAB Compiler
 
-Source code for paper: SIMIT: Subjectively Interesting Motifs in Time Series
+1. Prerequisites for Deployment 
 
-This folder contains the source code for Entropy submission:
-SIMIT: Subjectively Interesting Motifs in Time Series
+. Verify the MATLAB Runtime is installed and ensure you    
+  have installed version 9.1 (R2016b).   
 
-=======================
-Set up
-=======================
+. If the MATLAB Runtime is not installed, do the following:
+  (1) enter
+  
+      >>mcrinstaller
+      
+      at MATLAB prompt. The MCRINSTALLER command displays the 
+      location of the MATLAB Runtime installer.
 
-- Environment: Matlab R2016b, Python2.7
+  (2) run the MATLAB Runtime installer.
 
-- Requirement:
+Or download the Linux 64-bit version of the MATLAB Runtime for R2016b 
+from the MathWorks Web site by navigating to
 
-    --numpy 1.15.2
-    —-ortools 6.10
-
-
-=======================
-Data
-=======================
-Our paper describes the results on a synthetic and two real-world dataset. All the dataset is put in the folder named ‘data’.
-
-- Synthesized time series:
-
-  This time series is synthesised based on prototypes taken from 2 subsequence instances in the UCR Trace Data.
-
-[1]Chen, Y.; Keogh, E.; Hu, B.; Begum, N.; Bagnall, A.; Mueen, A.; Batista, G. The UCR Time Series Classification Archive, 2015. www.cs.ucr.edu/~eamonn/time_series_data/
-
-  Local directory: ‘data/Trace’   —— the original Trace data
-                   ‘data/synthesized_dataset.mat’   —— the synthesized data
+   http://www.mathworks.com/products/compiler/mcr/index.html
+   
+   
+For more information about the MATLAB Runtime and the MATLAB Runtime installer, see 
+Package and Distribute in the MATLAB Compiler documentation  
+in the MathWorks Documentation Center.    
 
 
+2. Files to Deploy and Package
 
-- MIT-BIH arrhythmia ECG recording:
+Files to package for Standalone 
+================================
+-main 
+-run_main.sh (shell script for temporarily setting environment variables and executing 
+              the application)
+   -to run the shell script, type
+   
+       ./run_main.sh <mcr_directory> <argument_list>
+       
+    at Linux or Mac command prompt. <mcr_directory> is the directory 
+    where version 9.1 of the MATLAB Runtime is installed or the directory where 
+    MATLAB is installed on the machine. <argument_list> is all the 
+    arguments you want to pass to your application. For example, 
 
-  This data set is recording #205 in the MIT-BIH Arrhythmia DataBase.
+    If you have version 9.1 of the MATLAB Runtime installed in 
+    /mathworks/home/application/v91, run the shell script as:
+    
+       ./run_main.sh /mathworks/home/application/v91
+       
+    If you have MATLAB installed in /mathworks/devel/application/matlab, 
+    run the shell script as:
+    
+       ./run_main.sh /mathworks/devel/application/matlab
+-MCRInstaller.zip
+   -if end users are unable to download the MATLAB Runtime using the above  
+    link, include it when building your component by clicking 
+    the "Runtime downloaded from web" link in the Deployment Tool
+-This readme file 
 
-[2]Moody, G.B.; Mark, R.G. The impact of the MIT-BIH Arrhythmia Database. IEEE Engineering in Medicine and Biology Magazine 2001, 20, 45–50.
+3. Definitions
 
-  Local directory: ‘data/arrhythmia’
-
-
-
-- Belgium Power Load Data:
-
-  This data set is taken from Open Power System Data. The primary source of this data is ENTSO-E Data Portal/Power Statistics.
-
-[3]Open power system data. Data Package Time series. Version 2018-03-13, 2018.
-[4]ENTOSO-E. Detailed hourly load data for all countries 2006-2015. https://www.entsoe.eu/data/data- portal/, 2015.
-
-   Local directory: ‘data/BE_load.mat’
+For information on deployment terminology, go to 
+http://www.mathworks.com/help. Select MATLAB Compiler >   
+Getting Started > About Application Deployment > 
+Deployment Product Terms in the MathWorks Documentation 
+Center.
 
 
+4. Appendix 
 
-=======================
-Run
-=======================
+A. Linux x86-64 systems:
+In the following directions, replace MCR_ROOT by the directory where the MATLAB Runtime 
+   is installed on the target machine.
 
-- Motif discovery using our SI measure:
-  run script ‘main.m’ to generate results
+(1) Set the environment variable XAPPLRESDIR to this value:
 
-- Studying the effects of the pruning factor:
-  run script ‘test_prunningFactor.m’
+    MCR_ROOT/v91/X11/app-defaults
 
-- Creating the synthetic time series—‘synthesized_dataset.mat’:
-  run script ’synthesize_TS.m’ to construct the dataset
 
-- Run time:
-  the runtime can be measured by putting 'tic' and 'toc' commands in script ‘main.m’ for each setting of l and n.
-  only the runtime for identifying the initial motif set on the ECG time series is measured. The function ‘instances_for_initial_template’ implements this step.
+(2) If the environment variable LD_LIBRARY_PATH is undefined, set it to the concatenation 
+   of the following strings:
+
+    MCR_ROOT/v91/runtime/glnxa64:
+    MCR_ROOT/v91/bin/glnxa64:
+    MCR_ROOT/v91/sys/os/glnxa64:
+    MCR_ROOT/v91/sys/opengl/lib/glnxa64
+
+    If it is defined, set it to the concatenation of these strings:
+
+    ${LD_LIBRARY_PATH}: 
+    MCR_ROOT/v91/runtime/glnxa64:
+    MCR_ROOT/v91/bin/glnxa64:
+    MCR_ROOT/v91/sys/os/glnxa64:
+    MCR_ROOT/v91/sys/opengl/lib/glnxa64
+
+   For more detail information about setting the MATLAB Runtime paths, see Package and 
+   Distribute in the MATLAB Compiler documentation in the MathWorks Documentation Center.
+
+
+     
+        NOTE: To make these changes persistent after logout on Linux 
+              or Mac machines, modify the .cshrc file to include this  
+              setenv command.
+        NOTE: The environment variable syntax utilizes forward 
+              slashes (/), delimited by colons (:).  
+        NOTE: When deploying standalone applications, it is possible 
+              to run the shell script file run_main.sh 
+              instead of setting environment variables. See 
+              section 2 "Files to Deploy and Package".    
+
+
+
+
+
+
