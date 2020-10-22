@@ -8,11 +8,11 @@ SIMIT: Subjectively Interesting Motifs in Time Series
 Set up
 =======================
 
-- Environment: Matlab R2016b, Python3.5
+- Environment: Matlab R2016b, Python2.7
 
 - Requirement:
 
-    --numpy 1.15.2
+    --numpy 1.11.1
     —-ortools 6.10
 
 
@@ -23,12 +23,12 @@ Our paper describes the results on a synthetic and two real-world dataset. All t
 
 - Synthesized time series:
 
-  This time series is synthesised based on prototypes taken from 2 subsequence instances in the UCR Trace Data.  
+  This time series is synthesised based on prototypes taken from 2 subsequence instances in the UCR Trace Data.
 
 [1]Chen, Y.; Keogh, E.; Hu, B.; Begum, N.; Bagnall, A.; Mueen, A.; Batista, G. The UCR Time Series Classification Archive, 2015. www.cs.ucr.edu/~eamonn/time_series_data/
 
   Local directory: ‘data/Trace’   —— the original Trace data
-                   ‘data/synthesized_dataset.mat’   —— the synthesized data  
+                   ‘data/synthesized_dataset.mat’   —— the synthesized data
 
 
 
@@ -52,12 +52,12 @@ Our paper describes the results on a synthetic and two real-world dataset. All t
    Local directory: ‘data/BE_load.mat’
 
 
-    
+
 =======================
 Run
 =======================
 
-- Motif discovery using our SI measure:  
+- Motif discovery using our SI measure:
   run script ‘main.m’ to generate results
 
 - Studying the effects of the pruning factor:
@@ -65,8 +65,7 @@ Run
 
 - Creating the synthetic time series—‘synthesized_dataset.mat’:
   run script ’synthesize_TS.m’ to construct the dataset
-  
-- Run time: 
-  the runtime can be measured by putting 'tic' and 'toc' commands in script ‘main.m’ for each setting of l and n.
-  only the runtime for identifying the initial motif set on the ECG time series is measured. The function ‘instances_for_initial_template’ implements this step. 
 
+- Run time:
+  the runtime can be measured by putting 'tic' and 'toc' commands in script ‘main.m’ for each setting of l and n.
+  only the runtime for identifying the initial motif set on the ECG time series is measured. The function ‘instances_for_initial_template’ implements this step.
