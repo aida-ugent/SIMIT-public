@@ -2,19 +2,19 @@ dataset = input(['Which time series? \n ' ...
     'The synthesized Trace dataset (Type s), ECG time series (Type e), Belgium power load data (Type b)'], 's');
 
 if dataset == 's'
-    Data = load('data/synthesized_dataset.mat');
+    Data = load('/smit/data//synthesized_dataset.mat');
     x = Data.x;
     l = 275;
 
 elseif dataset == 'e'
-    fid = fopen('data/arrhythmia/205.dat');
+    fid = fopen('/smit/data//arrhythmia/205.dat');
     f=fread(fid,'ubit12');
     Orig_sig = f(1:2:length(f));
     x = Orig_sig(104400:111600);
     l = 100;
 
 elseif dataset == 'b'
-    X = load('data/BE_load.mat');
+    X = load('/smit/data//BE_load.mat');
     x = X.BE_load_entsoe_power_statistics;
     l = 24;
 
@@ -22,8 +22,8 @@ else
     disp('invalid input')
 end
 
-python2path = input(['Please type your python2 path in your pc \n ' ...
-    '(For example: /Users/junningdeng/anaconda/bin)   '],'s');
+python2path = '/usr/bin/python';
+
 
 
 
