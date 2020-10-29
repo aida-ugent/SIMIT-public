@@ -2,12 +2,12 @@ dataset = input(['Which time series? \n ' ...
     'The synthesized Trace dataset (Type s), ECG time series (Type e), Belgium power load data (Type b)'], 's');
 
 if dataset == 's'
-    Data = load('/simit/data//synthesized_dataset.mat');
+    Data = load('/simit/data/synthesized_dataset.mat');
     x = Data.x;
     l = 275;
 
 elseif dataset == 'e'
-    fid = fopen('/simit/data//arrhythmia/205.dat');
+    fid = fopen('/simit/data/arrhythmia/205.dat');
     f=fread(fid,'ubit12');
     Orig_sig = f(1:2:length(f));
     x = Orig_sig(104400:105400);
@@ -15,7 +15,7 @@ elseif dataset == 'e'
     l = 100;
 
 elseif dataset == 'b'
-    X = load('/smit/data//BE_load.mat');
+    X = load('/simit/data/BE_load.mat');
     x = X.BE_load_entsoe_power_statistics;
     l = 24;
 

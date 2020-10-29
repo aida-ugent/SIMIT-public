@@ -9,10 +9,10 @@ csvwrite('M.csv',M);
 pwd;
 
 if fix_ins == 'n'
-    commandStr = ['python /smit/cp_full.py', ' M.csv', cell2mat(strcat({' '},int2str(candi_count))), cell2mat(strcat({' '},int2str(wind_size)))];
+    commandStr = ['python /simit/cp_full.py', ' M.csv', cell2mat(strcat({' '},int2str(candi_count))), cell2mat(strcat({' '},int2str(wind_size)))];
     system(commandStr);
 else
-    commandStr = ['python /smit/cp_pruned.py', ' M.csv', cell2mat(strcat({' '},int2str(candi_count))), cell2mat(strcat({' '},int2str(wind_size))), cell2mat(strcat({' '},int2str(reduce_size))) ];
+    commandStr = ['python /simit/cp_pruned.py', ' M.csv', cell2mat(strcat({' '},int2str(candi_count))), cell2mat(strcat({' '},int2str(wind_size))), cell2mat(strcat({' '},int2str(reduce_size))) ];
     system(commandStr);
 end
 
