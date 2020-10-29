@@ -10,7 +10,8 @@ elseif dataset == 'e'
     fid = fopen('/simit/data//arrhythmia/205.dat');
     f=fread(fid,'ubit12');
     Orig_sig = f(1:2:length(f));
-    x = Orig_sig(104400:111600);
+    x = Orig_sig(104400:105400);
+    %     x = Orig_sig(104400:111600);
     l = 100;
 
 elseif dataset == 'b'

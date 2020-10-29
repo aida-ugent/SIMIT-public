@@ -6,7 +6,7 @@ function inss = instances_for_initial_template(M,candi_count,wind_size,fix_ins,r
 setenv('PATH', [python2path, pathsep, getenv('PATH')])
 csvwrite('M.csv',M);
 
-pwd
+pwd;
 
 if fix_ins == 'n'
     commandStr = ['python /smit/cp_full.py', ' M.csv', cell2mat(strcat({' '},int2str(candi_count))), cell2mat(strcat({' '},int2str(wind_size)))];
