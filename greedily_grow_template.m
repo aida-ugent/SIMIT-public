@@ -1,8 +1,8 @@
-function [inss,new_m, new_S, ics_up, overlap_ind,min_ic]=greedily_grow_template(x,...
+function [inss,new_m, new_S, ics_up, overlap_ind,min_ic,f]=greedily_grow_template(x,...
     m_up,S_up,up_W,inss_up,ics,n,c,l,reduced_size,overlap_ind,num_round)
 
-
-figure(num_round);
+f = figure(num_round);
+set(f,'Visible','off');
 
 %--------------------------------------------------------------------------
 
@@ -164,3 +164,4 @@ subplot(3,1,2),legend(legendinfo1);
 
 subplot(3,1,3),errorbar(linspace(1,l,l),m_up(inss(end):inss(end)+l-1),sqrt(var_up(inss(end):inss(end)+l-1)),'-*');
 title(['Template',num2str(inss)]);
+

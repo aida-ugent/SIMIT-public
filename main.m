@@ -2,12 +2,12 @@ dataset = input(['Which time series? \n ' ...
     'The synthesized Trace dataset (Type s), ECG time series (Type e), Belgium power load data (Type b)'], 's');
 
 if dataset == 's'
-    Data = load('/smit/data//synthesized_dataset.mat');
+    Data = load('/simit/data//synthesized_dataset.mat');
     x = Data.x;
     l = 275;
 
 elseif dataset == 'e'
-    fid = fopen('/smit/data//arrhythmia/205.dat');
+    fid = fopen('/simit/data//arrhythmia/205.dat');
     f=fread(fid,'ubit12');
     Orig_sig = f(1:2:length(f));
     x = Orig_sig(104400:111600);
@@ -97,9 +97,11 @@ while ~isempty(candi_sid_up)
     % Incorporating the initial set to update the background distribution
     [m_up, S_up, var_up]=final_mean_covariance(x, init_inss, m, S, l);
     
-    [inss,new_m, new_S,new_ics, all_overlap,min_ic]= greedily_grow_template(x,m_up,S_up,...
+    [inss,new_m, new_S,new_ics, all_overlap,min_ic,f]= greedily_grow_template(x,m_up,S_up,...
         up_W,init_inss,ics,n,init_c,l,reduced_size,all_overlap,num_round);
-    
+    fig_name = sprintf('results_round_%d', num_round);
+    savefig(f,[fig_name '.fig']);
+    close(f);
     c = length(inss);
     
     if c<= init_c + 1
@@ -123,8 +125,8 @@ while ~isempty(candi_sid_up)
     
     num_round = num_round + 1;
     
-    
 end
+
 
 % -------------------------------------------------------------------------
 
